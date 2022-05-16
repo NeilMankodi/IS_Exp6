@@ -1,6 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-# import bcrypt
 from hashlib import sha256
 from .models import User
 
@@ -23,6 +22,7 @@ def register(request):
 def login(request):
     if (User.objects.filter(email=request.POST['user_name']).exists()):
         user = User.objects.filter(email=request.POST['user_name'])[0]
+
         if ((sha256(request.POST['login_password'].encode()).hexdigest()).encode() == user.password.encode()):
             request.session['id'] = user.id
             return redirect('/success')
