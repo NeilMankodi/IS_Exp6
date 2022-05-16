@@ -4,13 +4,9 @@ from django.db import models
 class UserManager(models.Manager):
     def validator(self, postData):
         errors = {}
-        if (postData['first_name'].isalpha()) == False:
-            if len(postData['first_name']) < 2:
+        if (postData['user_name'].isalpha()) == False:
+            if len(postData['user_name']) < 2:
                 errors['first_name'] = "First name can not be shorter than 2 characters"
-
-        if (postData['last_name'].isalpha()) == False:
-            if len(postData['last_name']) < 2:
-                errors['last_name'] = "Last name can not be shorter than 2 characters"
 
         if len(postData['email']) == 0:
             errors['email'] = "You must enter an email"
@@ -21,8 +17,7 @@ class UserManager(models.Manager):
         return errors
 
 class User(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    user_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add = True)
