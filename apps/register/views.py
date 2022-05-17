@@ -20,8 +20,8 @@ def register(request):
     return redirect('/success')
 
 def login(request):
-    if (User.objects.filter(email=request.POST['user_name']).exists()):
-        user = User.objects.filter(email=request.POST['user_name'])[0]
+    if (User.objects.filter(user_name=request.POST['user_name']).exists()):
+        user = User.objects.filter(user_name=request.POST['user_name'])[0]
 
         if ((sha256(request.POST['login_password'].encode()).hexdigest()).encode() == user.password.encode()):
             request.session['id'] = user.id

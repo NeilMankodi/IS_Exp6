@@ -6,7 +6,7 @@ class UserManager(models.Manager):
         errors = {}
         if (postData['user_name'].isalpha()) == False:
             if len(postData['user_name']) < 2:
-                errors['first_name'] = "First name can not be shorter than 2 characters"
+                errors['user_name'] = "First name can not be shorter than 2 characters"
 
         if len(postData['email']) == 0:
             errors['email'] = "You must enter an email"
@@ -23,3 +23,6 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     objects = UserManager()
+
+    def _str_(self):
+        return self.user_name
